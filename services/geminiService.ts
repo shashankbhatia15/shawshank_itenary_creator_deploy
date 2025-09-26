@@ -1,8 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { DestinationSuggestion, TravelPlan, ItineraryStyle, CostBreakdown, DailyPlan, ItineraryLocation, PackingListCategory, CurrencyInfo } from '../types';
 
-// FIX: Initialize the Gemini API client using process.env.API_KEY as per the guidelines.
-// This also resolves the TypeScript error regarding 'import.meta.env'.
+// FIX: Corrected API key initialization to use `process.env.API_KEY` to align with @google/genai guidelines and resolve the TypeScript error.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // --- Persistent Caching Mechanism ---
