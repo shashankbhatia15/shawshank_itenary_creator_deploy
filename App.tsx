@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import type { AppStep, DestinationSuggestion, TravelPlan, ItineraryStyle, ItineraryLocation, SavedPlan, PackingListCategory } from './types';
+import type { AppStep, DestinationSuggestion, TravelPlan, ItineraryStyle, ItineraryLocation, SavedPlan, PackingListCategory, DailyPlan } from './types';
 import { getTravelSuggestions, getTravelPlan, getDirectCountryInfo, rebuildTravelPlan, getOffBeatSuggestions, getComprehensiveTravelPlan } from './services/geminiService';
 import TripInputForm from './components/TripInputForm';
 import DestinationSuggestions from './components/DestinationSuggestions';
@@ -174,8 +174,8 @@ const App: React.FC = () => {
             }, [] as string[]);
         
         // FIX: Explicitly typing `index` as `number` to prevent a type inference issue.
-        const removalInstructions = Array.from(citiesMarkedForRemoval).map((index: number) => 
-            `- The visit to ${citiesVisited[index]} (which is stop number ${index + 1} in the sequence: ${citiesVisited.join(' -> ')})`
+        const removalInstructions = Array.from(citiesMarkedForRemoval).map((cityIndex: number) => 
+            `- The visit to ${citiesVisited[cityIndex]} (which is stop number ${cityIndex + 1} in the sequence: ${citiesVisited.join(' -> ')})`
         ).join('\n');
         
         const removalPrompt = `CRITICAL TASK: First, you MUST remove the following city stops and all their associated days/activities from the itinerary. This will make the trip shorter.
@@ -363,7 +363,7 @@ Once the cities are removed, apply the user's other refinement notes (if any) to
             if (loadedData.plan && loadedData.destination && loadedData.plan.itinerary) {
                 const planWithIds: TravelPlan = {
                     ...loadedData.plan,
-                    itinerary: loadedData.plan.itinerary.map((day: any) => ({
+                    itinerary: loadedData.plan.itinerary.map((day: DailyPlan) => ({
                         ...day,
                         activities: day.activities.map((activity: ItineraryLocation) => ({
                             ...activity,
