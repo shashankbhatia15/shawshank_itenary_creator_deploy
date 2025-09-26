@@ -1,7 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { DestinationSuggestion, TravelPlan, ItineraryStyle, CostBreakdown, DailyPlan, ItineraryLocation, PackingListCategory, CurrencyInfo } from '../types';
 
-// FIX: Corrected API key initialization to use `process.env.API_KEY` to align with @google/genai guidelines and resolve the TypeScript error.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // --- Persistent Caching Mechanism ---
