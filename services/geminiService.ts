@@ -1,6 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { DestinationSuggestion, TravelPlan, ItineraryStyle, CostBreakdown, DailyPlan, ItineraryLocation, PackingListCategory, CurrencyInfo } from '../types';
 
+// FIX: Use `process.env.API_KEY` to adhere to the @google/genai SDK guidelines.
+// The value is injected by Vite during the build process (see vite.config.ts).
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // --- Persistent Caching Mechanism ---
