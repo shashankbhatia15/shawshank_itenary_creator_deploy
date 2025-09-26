@@ -1,10 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { DestinationSuggestion, TravelPlan, ItineraryStyle, CostBreakdown, DailyPlan, ItineraryLocation, PackingListCategory, CurrencyInfo } from '../types';
 
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable is not set");
-}
-
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // --- Persistent Caching Mechanism ---
@@ -309,7 +305,8 @@ Return the data in the specified JSON format.`,
       },
     });
 
-    const data = JSON.parse((response.text ?? '{}').trim());
+    // FIX: Use optional chaining and a fallback to prevent JSON.parse from failing on an empty string.
+    const data = JSON.parse(response.text?.trim() || '{}');
     setInCache(cacheKey, data);
     return data;
   } catch (error) {
@@ -345,7 +342,8 @@ Return the data as an array in the specified JSON format. Ensure all fields are 
         responseSchema: travelSuggestionsSchema,
       },
     });
-    const data = JSON.parse((response.text ?? '[]').trim());
+    // FIX: Use optional chaining and a fallback to prevent JSON.parse from failing on an empty string.
+    const data = JSON.parse(response.text?.trim() || '[]');
     setInCache(cacheKey, data);
     return data;
   } catch (error) {
@@ -378,7 +376,8 @@ Return the data as an array in the specified JSON format. Ensure all fields are 
         responseSchema: travelSuggestionsSchema,
       },
     });
-    const data = JSON.parse((response.text ?? '[]').trim());
+    // FIX: Use optional chaining and a fallback to prevent JSON.parse from failing on an empty string.
+    const data = JSON.parse(response.text?.trim() || '[]');
     setInCache(cacheKey, data);
     return data;
   } catch (error) {
@@ -423,7 +422,8 @@ Return a single JSON object matching the provided schema.`;
         responseSchema: travelPlanSchema,
       },
     });
-    const data = JSON.parse((response.text ?? '{}').trim());
+    // FIX: Use optional chaining and a fallback to prevent JSON.parse from failing on an empty string.
+    const data = JSON.parse(response.text?.trim() || '{}');
     setInCache(cacheKey, data);
     return data;
   } catch (error) {
@@ -469,7 +469,8 @@ Return a single JSON object matching the provided schema.`;
         responseSchema: travelPlanSchema,
       },
     });
-    const data = JSON.parse((response.text ?? '{}').trim());
+    // FIX: Use optional chaining and a fallback to prevent JSON.parse from failing on an empty string.
+    const data = JSON.parse(response.text?.trim() || '{}');
     setInCache(cacheKey, data);
     return data;
   } catch (error) {
@@ -520,7 +521,8 @@ Return the complete, updated travel plan as a single JSON object matching the pr
         responseSchema: travelPlanSchema,
       },
     });
-    const data = JSON.parse((response.text ?? '{}').trim());
+    // FIX: Use optional chaining and a fallback to prevent JSON.parse from failing on an empty string.
+    const data = JSON.parse(response.text?.trim() || '{}');
     return data;
   } catch (error) {
     throw new Error(parseApiError(error, `rebuilding the travel plan for ${destination}`));
@@ -551,7 +553,8 @@ Return the packing list as an array of categories in the specified JSON format.`
         responseSchema: packingListSchema,
       },
     });
-    const data = JSON.parse((response.text ?? '[]').trim());
+    // FIX: Use optional chaining and a fallback to prevent JSON.parse from failing on an empty string.
+    const data = JSON.parse(response.text?.trim() || '[]');
     setInCache(cacheKey, data);
     return data;
   } catch (error) {

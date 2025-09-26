@@ -75,12 +75,12 @@ Follow these steps to get the development environment running on your local mach
 
 3.  **Set Up Environment Variables:**
     The application requires a Google Gemini API key to function.
-    1.  Create a new file named `.env` in the root directory. You can do this by copying the example file if one exists, or creating it manually.
-    2.  Open the new `.env` file and add your API key:
+    1.  Create a new file named `.env` in the root directory.
+    2.  Open the new `.env` file and add your API key, prefixed with `VITE_`:
         ```
-        API_KEY="YOUR_GEMINI_API_KEY"
+        VITE_API_KEY="YOUR_GEMINI_API_KEY"
         ```
-        Replace `"YOUR_GEMINI_API_KEY"` with your actual key.
+        Replace `"YOUR_GEMINI_API_KEY"` with your actual key. This prefix is required by Vite for security reasons to expose the variable to the client-side code.
 
 ### Running the Application
 

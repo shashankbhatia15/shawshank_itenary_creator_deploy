@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import jsPDF from 'jspdf';
-import type { TravelPlan, DestinationSuggestion, DailyPlan, ItineraryLocation, PackingListCategory, CurrencyInfo, TravelInfo } from '../types';
+import type { TravelPlan, DestinationSuggestion, DailyPlan, ItineraryLocation, PackingListCategory, CurrencyInfo } from '../types';
 import InteractiveMap from './InteractiveMap';
 import TripTimelineChart from './TripTimelineChart';
 import TripOverviewMap from './LoadPlanModal';
